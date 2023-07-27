@@ -1,7 +1,7 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 
-const state = () => ({})
+export const state = () => ({})
 
 export type RootSubState = ReturnType<typeof state>
 
