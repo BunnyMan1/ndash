@@ -105,7 +105,8 @@
 <script lang="ts">
 import { ElUploadInternalFileDetail } from "element-ui/types/upload";
 import Vue from "vue";
-import { FeedbackItem } from "../store";
+import { FeedbackItem, RootState } from "../store";
+import { mapState } from "vuex";
 
 export default Vue.extend({
   name: "FeedbackDialog",
@@ -131,28 +132,14 @@ export default Vue.extend({
       formVisible: false,
       feedbackType: null,
       canShowAttachment: false,
-      feedbackTypes: [
-        {
-          id: 1,
-          name: "Report a Bug",
-          description: "Let us know so we can forward this to our bug control.",
-        },
-        {
-          id: 2,
-          name: "Request a Feature",
-          description:
-            "Do you have an idea that could make our app better? We would love to know!",
-        },
-        {
-          id: 3,
-          name: "Send Applause",
-          description: "Let us know what you really like about our app!",
-        },
-      ],
     };
   },
 
   computed: {
+    ...mapState({
+      feedbackTypes: (s: any) => (s as RootState).feedbackTypes,
+    }),
+
     shouldShowAttachments(): boolean {
       return this.feedbackType != "Send Applause";
     },
@@ -197,9 +184,6 @@ export default Vue.extend({
     async submit(): Promise<void> {
       this.emailError = "";
       this.messageError = "";
-
-      console.log(this.feedbackItem);
-
       if (
         !(this.feedbackItem?.message!.length > 0) &&
         !(this.feedbackItem?.email!.length > 0)
@@ -227,6 +211,7 @@ export default Vue.extend({
         //TODO: Upload images first.
         const fileData = new FormData();
         console.log("Before API Call");
+
         await this.$store.dispatch("submitFeedback", this.feedbackItem);
         this.$message({
           message: "Feedback submitted.",
@@ -315,3 +300,7 @@ export default Vue.extend({
   color: #171724;
 }
 </style>
+
+function mapState(arg0: string, arg1: { list: (s: any) => any; listTotalCount: (s: any) => any; }): import("vue/types/options").Accessors<unknown>|undefined {
+  throw new Error("Function not implemented.");
+}

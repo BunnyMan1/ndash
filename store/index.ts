@@ -1,11 +1,33 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosError } from 'axios'
 
-export const state = () => ({})
+const state = () => ({
+    feedbackTypes: [
+        {
+            id: 1,
+            name: "Report a Bug",
+            description: "Let us know so we can forward this to our bug control.",
+        },
+        {
+            id: 2,
+            name: "Request a Feature",
+            description:
+                "Do you have an idea that could make our app better? We would love to know!",
+        },
+        {
+            id: 3,
+            name: "Send Applause",
+            description: "Let us know what you really like about our app!",
+        },
+    ],
+})
 
 export type RootSubState = ReturnType<typeof state>
 
-export interface RootState extends RootSubState { }
+export interface RootState extends RootSubState {
+    list: any;
+    listTotalCount: any;
+}
 
 const getters: GetterTree<RootState, RootState> = {
 }
