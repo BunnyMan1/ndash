@@ -84,16 +84,9 @@
             ></el-input>
           </el-form-item>
 
-          <el-form-item v-if="shouldShowAttachments" label="Attachments"
-            ><br />
-            <!-- //TODO: File Upload funtionality. -->
-            <!-- <el-form-item label="Attachments">
-              <media-list-insert
-                ref="attachments"
-                :existing="existingAttachments"
-              />
-            </el-form-item>
-          </el-form-item> -->
+          <!-- <el-form-item v-if="shouldShowAttachments" label="Attachments"
+            ><br /> -->
+          <!-- //TODO: File Upload funtionality. -->
 
           <br />
           <span style="display: flex">
