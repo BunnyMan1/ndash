@@ -191,6 +191,7 @@ export default Vue.extend({
           {
             headers: {
               Authorization: "Bearer " + this.token,
+              "Content-Type": "multipart/form-data",
             },
           }
         );
