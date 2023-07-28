@@ -87,6 +87,12 @@
           <el-form-item v-if="shouldShowAttachments" label="Attachments"
             ><br />
             <!-- //TODO: File Upload funtionality. -->
+            <el-form-item label="Attachments">
+              <media-list-insert
+                ref="attachments"
+                :existing="existingAttachments"
+              />
+            </el-form-item>
           </el-form-item>
 
           <br />
@@ -224,8 +230,21 @@ export default Vue.extend({
         this.loading = true;
         //TODO: Upload images first.
         const fileData = new FormData();
+        if (this.feedbackItem.auth_token == null) {
+          return;
+        }
+        console.log(this.feedbackItem.auth_token);
+        let authToken: string = this.feedbackItem.auth_token;
         console.log("Before API Call");
-        await axios.post(this.feedbackItem.feedback_url, this.feedbackItem);
+        const response = await axios.post(
+          this.feedbackItem.feedback_url,
+          this.feedbackItem,
+          {
+            headers: { Authorization: "Bearer " + authToken },
+          }
+        );
+        console.log(response.data, response.status);
+        console.log("After call");
         // await this.$store.dispatch("submitFeedback", this.feedbackItem);
         this.$message({
           message: "Feedback submitted.",
