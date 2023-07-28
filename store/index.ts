@@ -43,7 +43,9 @@ const actions: ActionTree<RootState, RootState> = {
                 "user_agent": data.user_agent,
                 "device_id": data.device_id,
             })
+            console.log(data.feedback_url)
             await this.$axios.post(data.feedback_url, data)
+            console.log("After API Call");
         } catch (e) {
             console.log("feedback error.")
         }
