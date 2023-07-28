@@ -86,9 +86,9 @@
       </div>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button v-if="editItem" @click="$emit('submit', editItem.id)"
+      <!-- <el-button v-if="editItem" @click="$emit('submit', editItem.id)"
         >Delete</el-button
-      >
+      > -->
       <el-button @click="$emit('close')">Cancel</el-button>
       <el-button
         type="primary"
@@ -196,7 +196,7 @@ export default Vue.extend({
           }
         );
         if (response.data && response.data.length > 0) {
-          this.$emit("uploadedFile", response.data[0].id);
+          this.$emit("uploadedFile", response.data[0]);
         }
         this.$message({
           duration: 4000,

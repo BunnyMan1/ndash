@@ -111,9 +111,23 @@
 <script lang="ts">
 import { ElUploadInternalFileDetail } from "element-ui/types/upload";
 import Vue from "vue";
-import { FeedbackItem, RootState } from "../store";
+// import { FeedbackItem, RootState } from "../store";
 import axios from "axios";
 import { MediaLiteItem } from "./Media/MediaInsertDialog.vue";
+
+export interface FeedbackItem {
+  email?: string | null;
+  message?: string;
+  type: number;
+  sdk_version: string;
+  app_version: string;
+  auth_token: string;
+  user_agent?: string | null;
+  device_id?: string | null;
+  attachments: MediaLiteItem[];
+  feedback_url: string;
+  media_url: string;
+}
 
 export default Vue.extend({
   name: "FeedbackDialog",
@@ -130,7 +144,7 @@ export default Vue.extend({
         device_id: null as string | null,
         feedback_url: null as string | null,
         media_url: null as string | null,
-        attachments: null as number[] | null,
+        attachments: [] as MediaLiteItem[],
         type: null as number | null,
       } as FeedbackItem,
       emailError: null as string | null,
@@ -140,7 +154,6 @@ export default Vue.extend({
       formVisible: false,
       feedbackType: null,
       canShowAttachment: false,
-      attachements_Ids: null as number[] | null,
       feedbackTypes: [
         {
           id: 1,
@@ -172,14 +185,28 @@ export default Vue.extend({
     openDialog(feedback: FeedbackItem) {
       this.dialogVisible = true;
       this.feedbackType = null;
-      this.feedbackItem = feedback;
+
+      this.feedbackItem = {
+        type: 0,
+        message: "",
+        email: feedback.email,
+        sdk_version: feedback.sdk_version,
+        auth_token: feedback.auth_token,
+        feedback_url: feedback.feedback_url,
+        app_version: feedback.app_version,
+        user_agent: feedback.user_agent,
+        device_id: feedback.device_id,
+        media_url: feedback.media_url,
+        attachments: [] as MediaLiteItem[],
+      } as FeedbackItem;
     },
 
-    uploadedFile(mediaId: number) {
-      alert(mediaId);
-      this.attachements_Ids?.push(mediaId);
+    uploadedFile(media: MediaLiteItem) {
+      console.log(media);
+
+      this.feedbackItem.attachments.push({ id: media.id } as MediaLiteItem);
+
       console.log(this.feedbackItem.attachments);
-      return mediaId;
     },
 
     resetForm() {
@@ -239,7 +266,6 @@ export default Vue.extend({
         )!.id;
         this.loading = true;
         //TODO: Upload images first.
-        this.feedbackItem.attachments = this.attachements_Ids;
         // let attachmentsIds = this.uploadtoServer();
         const fileData = new FormData();
         console.log(this.feedbackItem.auth_token);

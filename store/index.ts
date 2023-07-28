@@ -109,7 +109,7 @@ export interface FeedbackItem {
     auth_token: string
     user_agent?: string | null
     device_id?: string | null
-    attachments: MediaLiteItem[] | null
+    attachments: MediaLiteItem[]
     feedback_url: string
     media_url: string
 }
