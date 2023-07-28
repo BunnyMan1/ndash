@@ -58,6 +58,7 @@
       @submit="addFile"
       :imageOnly="imageOnly"
       :allowVideo="allowVideo"
+      @uploadedFile="uploadedFile"
     />
   </div>
 </template>
@@ -120,6 +121,10 @@ export default {
         this.data = [...this.existing];
       }
     },
+
+    uploadedFile(mediaId) {
+      this.$emit("uploadedFile", mediaId);
+    },
   },
 
   props: {
@@ -169,15 +174,15 @@ export default {
   cursor: pointer;
   min-width: 160px;
   max-width: 180px;
-  background-color: red;
-  border: 2px dashed green;
+  // background-color: red;
+  // border: 2px dashed green;
   margin-right: 32px;
   transition: 0.2s;
   font-weight: 500;
 
-  &:hover {
-    background-color: blue;
-  }
+  // &:hover {
+  //   // background-color: blue;
+  // }
 
   .media-list-display__item_top {
     display: flex;
@@ -244,12 +249,12 @@ export default {
     align-items: center;
     font-size: 20px;
     height: 140px;
-    background-color: green;
+    // background-color: green;
   }
 }
 
 .media-list-display__item_bottom {
-  background-color: red;
+  // background-color: red;
   border-radius: 0 0 8px 8px;
   padding: 12px;
 }
@@ -258,9 +263,9 @@ export default {
   margin-bottom: initial;
 }
 
-.media-list-display__item_primary {
-  color: red;
-}
+// .media-list-display__item_primary {
+//   color: red;
+// }
 
 .media-list-display__item_label {
   font-size: 15px;

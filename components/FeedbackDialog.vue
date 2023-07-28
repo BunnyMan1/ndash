@@ -91,6 +91,7 @@
               ref="attachments"
               :mediaUrl="FeedbackItem?.media_url"
               :token="FeedbackItem?.token"
+              @uploadedFile="uploadedFile"
             />
           </el-form-item>
 
@@ -171,6 +172,11 @@ export default Vue.extend({
       this.dialogVisible = true;
       this.feedbackType = null;
       this.feedbackItem = feedback;
+    },
+
+    uploadedFile(mediaId: number) {
+      this.feedbackItem.attachments?.push({ id: mediaId } as MediaLiteItem);
+      console.log(this.feedbackItem.attachments);
     },
 
     resetForm() {
