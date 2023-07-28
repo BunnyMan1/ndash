@@ -1,7 +1,12 @@
 <template>
   <div>
     <!-- Feedback Types -->
-    <el-dialog :visible.sync="dialogVisible" width="40%" style="z-index: 9999" class="feedback-dialog">
+    <el-dialog
+      :visible.sync="dialogVisible"
+      width="40%"
+      style="z-index: 9999"
+      class="feedback-dialog"
+    >
       <template v-slot:title>
         <div class="dialog-title">
           <span
@@ -22,7 +27,12 @@
           class="option-list"
           :class="{ 'border-active': feedbackType === item.name }"
         >
-          <el-radio class="feedback-option" v-model="feedbackType" :label="item.name" ref="feedback"></el-radio>
+          <el-radio
+            class="feedback-option"
+            v-model="feedbackType"
+            :label="item.name"
+            ref="feedback"
+          ></el-radio>
           <br />
           <span style="margin-left: 24px">{{ item.description }}</span>
         </div>
@@ -30,16 +40,29 @@
     </el-dialog>
 
     <!-- Feedback Form -->
-    <el-dialog :visible.sync="formVisible" width="40%" style="z-index: 9999" class="feedback-dialog" :show-close="false">
+    <el-dialog
+      :visible.sync="formVisible"
+      width="40%"
+      style="z-index: 9999"
+      class="feedback-dialog"
+      :show-close="false"
+    >
       <template v-slot:title>
         <div class="dialog-title">
           <span class="title-container">
-            <el-button @click="goBack" icon="el-icon-arrow-left" size="small"></el-button>
+            <el-button
+              @click="goBack"
+              icon="el-icon-arrow-left"
+              size="small"
+            ></el-button>
             <span class="selected-option dialog-title">{{ feedbackType }}</span>
           </span>
 
           <div class="form-divider"></div>
-          <p class="sub-title">We are listening! Please provide as much information as possible so that we can help you.</p>
+          <p class="sub-title">
+            We are listening! Please provide as much information as possible so
+            that we can help you.
+          </p>
         </div>
       </template>
       <template>
@@ -54,7 +77,11 @@
             ></el-input>
           </el-form-item>
           <el-form-item label="Email" required :error="emailError">
-            <el-input v-model="feedbackItem.email" placeholder="Enter your email." style="width: 100%"></el-input>
+            <el-input
+              v-model="feedbackItem.email"
+              placeholder="Enter your email."
+              style="width: 100%"
+            ></el-input>
           </el-form-item>
 
           <el-form-item v-if="shouldShowAttachments" label="Attachments"
@@ -65,7 +92,12 @@
           <br />
           <span style="display: flex">
             <el-button @click="goBack()">Cancel</el-button>
-            <el-button @click="submitFeedback" type="primary" style="width: 100%">Submit</el-button>
+            <el-button
+              @click="submitFeedback"
+              type="primary"
+              style="width: 100%"
+              >Submit</el-button
+            >
           </span>
         </el-form>
       </template>
@@ -74,18 +106,18 @@
 </template>
 
 <script lang="ts">
-import { ElUploadInternalFileDetail } from 'element-ui/types/upload'
-import Vue from 'vue'
-import { FeedbackItem } from '../store'
+import { ElUploadInternalFileDetail } from "element-ui/types/upload";
+import Vue from "vue";
+import { FeedbackItem } from "../store";
 
 export default Vue.extend({
-  name: 'FeedbackDialog',
+  name: "FeedbackDialog",
   data() {
     return {
       file: null as ElUploadInternalFileDetail[] | null,
       feedbackItem: {
-        email: '',
-        message: '',
+        email: null as string | null,
+        message: null as string | null,
         auth_token: null as string | null,
         sdk_version: null as string | null,
         app_version: null as string | null,
@@ -105,112 +137,118 @@ export default Vue.extend({
       feedbackTypes: [
         {
           id: 1,
-          name: 'Report a Bug',
-          description: 'Let us know so we can forward this to our bug control.',
+          name: "Report a Bug",
+          description: "Let us know so we can forward this to our bug control.",
         },
         {
           id: 2,
-          name: 'Request a Feature',
-          description: 'Do you have an idea that could make our app better? We would love to know!',
+          name: "Request a Feature",
+          description:
+            "Do you have an idea that could make our app better? We would love to know!",
         },
         {
           id: 3,
-          name: 'Send Applause',
-          description: 'Let us know what you really like about our app!',
+          name: "Send Applause",
+          description: "Let us know what you really like about our app!",
         },
       ],
-    }
+    };
   },
 
   computed: {
     shouldShowAttachments(): boolean {
-      return this.feedbackType != 'Send Applause'
+      return this.feedbackType != "Send Applause";
     },
   },
 
   methods: {
     openDialog(feedback: FeedbackItem) {
-      this.dialogVisible = true
-      this.feedbackType = null
-      this.feedbackItem = feedback
+      this.dialogVisible = true;
+      this.feedbackType = null;
+      this.feedbackItem = feedback;
     },
 
     resetForm() {
-      this.emailError = null
-      this.messageError = null
-      this.feedbackItem.message = ''
+      this.emailError = null;
+      this.messageError = null;
+      this.feedbackItem.message = "";
     },
 
     openForm(feedbackType: any) {
-      this.resetForm()
-      this.feedbackType = feedbackType.name
-      this.dialogVisible = false
-      this.formVisible = true
+      this.resetForm();
+      this.feedbackType = feedbackType.name;
+      this.dialogVisible = false;
+      this.formVisible = true;
     },
 
     goBack() {
-      this.$confirm('This will clears all filled data. Continue?', 'Warning', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
+      this.$confirm("This will clears all filled data. Continue?", "Warning", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "warning",
       })
         .then(() => {
-          this.dialogVisible = true
-          this.formVisible = false
-          this.feedbackItem.message = ''
+          this.dialogVisible = true;
+          this.formVisible = false;
+          this.feedbackItem.message = "";
         })
         .catch(() => {
-          return
-        })
+          return;
+        });
     },
 
     async submitFeedback(): Promise<void> {
-      this.emailError = ''
-      this.messageError = ''
+      this.emailError = "";
+      this.messageError = "";
 
-      console.log(this.feedbackItem)
+      console.log(this.feedbackItem);
 
-      if (!(this.feedbackItem?.message!.length > 0) && !(this.feedbackItem?.email!.length > 0)) {
-        this.messageError = 'Please enter your feedback.'
-        this.emailError = 'Please enter your email.'
-        return
+      if (
+        !(this.feedbackItem?.message!.length > 0) &&
+        !(this.feedbackItem?.email!.length > 0)
+      ) {
+        this.messageError = "Please enter your feedback.";
+        this.emailError = "Please enter your email.";
+        return;
       }
 
       if (!(this.feedbackItem?.message!.length > 0)) {
-        this.messageError = 'Please enter your feedback.'
-        return
+        this.messageError = "Please enter your feedback.";
+        return;
       }
 
       if (this.feedbackItem?.email == null) {
-        this.emailError = 'Please enter your email.'
-        return
+        this.emailError = "Please enter your email.";
+        return;
       }
 
       try {
-        this.feedbackItem.type = this.feedbackTypes.find((x) => x.name == this.feedbackType)!.id
-        this.loading = true
+        this.feedbackItem.type = this.feedbackTypes.find(
+          (x) => x.name == this.feedbackType
+        )!.id;
+        this.loading = true;
         //TODO: Upload images first.
-        const fileData = new FormData()
-        await this.$store.dispatch('submitFeedback', this.feedbackItem)
+        const fileData = new FormData();
+        await this.$store.dispatch("submitFeedback", this.feedbackItem);
         this.$message({
-          message: 'Feedback submitted.',
-          type: 'success',
-        })
+          message: "Feedback submitted.",
+          type: "success",
+        });
 
-        this.dialogVisible = false
-        this.formVisible = false
-        this.feedbackItem = {} as FeedbackItem
+        this.dialogVisible = false;
+        this.formVisible = false;
+        this.feedbackItem = {} as FeedbackItem;
       } catch (error: any) {
         this.$message({
-          message: 'Error in creating feedback.',
-          type: 'error',
-        })
+          message: "Error in creating feedback.",
+          type: "error",
+        });
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
   },
-})
+});
 </script>
 
 <style lang="scss">
