@@ -130,7 +130,7 @@ export default Vue.extend({
         device_id: null as string | null,
         feedback_url: null as string | null,
         media_url: null as string | null,
-        attachments: null as MediaLiteItem[] | null,
+        attachments: null as number[] | null,
         type: null as number | null,
       } as FeedbackItem,
       emailError: null as string | null,
@@ -140,6 +140,7 @@ export default Vue.extend({
       formVisible: false,
       feedbackType: null,
       canShowAttachment: false,
+      attachements_Ids: null as number[] | null,
       feedbackTypes: [
         {
           id: 1,
@@ -176,8 +177,9 @@ export default Vue.extend({
 
     uploadedFile(mediaId: number) {
       alert(mediaId);
-      this.feedbackItem.attachments?.push({ id: mediaId } as MediaLiteItem);
+      this.attachements_Ids?.push(mediaId);
       console.log(this.feedbackItem.attachments);
+      return mediaId;
     },
 
     resetForm() {
@@ -237,6 +239,7 @@ export default Vue.extend({
         )!.id;
         this.loading = true;
         //TODO: Upload images first.
+        this.feedbackItem.attachments = this.attachements_Ids;
         // let attachmentsIds = this.uploadtoServer();
         const fileData = new FormData();
         console.log(this.feedbackItem.auth_token);
