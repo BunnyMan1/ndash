@@ -195,7 +195,7 @@ export default Vue.extend({
           }
         );
         if (response.data && response.data.length > 0) {
-          this.$emit("uploadedFile", response.data[0]);
+          this.$emit("uploadedFile", response.data[0].id);
         }
         this.$message({
           duration: 4000,
