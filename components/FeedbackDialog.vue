@@ -175,6 +175,7 @@ export default Vue.extend({
     },
 
     uploadedFile(mediaId: number) {
+      alert(mediaId);
       this.feedbackItem.attachments?.push({ id: mediaId } as MediaLiteItem);
       console.log(this.feedbackItem.attachments);
     },
@@ -268,29 +269,6 @@ export default Vue.extend({
         this.loading = false;
       }
     },
-
-    // async uploadtoServer(data: any): Promise<Number> {
-    //   try {
-    //     const res = await this.$axios.post("/media", data, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     });
-    //     if (res.data && res.data.length > 0) return res.data[0];
-    //   } catch (error) {
-    //     if (axios.isAxiosError(error)) {
-    //       console.log(error.response?.data);
-    //       if (
-    //         error.response?.status == 413 ||
-    //         (typeof error.response?.data == "string" &&
-    //           error.response?.data.includes("large"))
-    //       )
-    //         throw "File is too large";
-    //     }
-    //     throw error;
-    //   }
-    //   return 10;
-    // },
   },
 });
 </script>

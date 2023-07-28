@@ -115,13 +115,6 @@ export default {
       this.dialogOpen = true;
     },
 
-    checkUpdate() {
-      this.data = [];
-      if (this.existing && this.existing.length > 0) {
-        this.data = [...this.existing];
-      }
-    },
-
     uploadedFile(mediaId) {
       this.$emit("uploadedFile", mediaId);
     },

@@ -194,9 +194,9 @@ export default Vue.extend({
             },
           }
         );
-
-        this.$emit("uploadedFile", response.data[0]);
-
+        if (response.data && response.data.length > 0) {
+          this.$emit("uploadedFile", response.data[0]);
+        }
         this.$message({
           duration: 4000,
           message: `File uploaded. Complete the form and submit.`,
