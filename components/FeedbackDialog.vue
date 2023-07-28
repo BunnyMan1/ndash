@@ -106,7 +106,7 @@
 import { ElUploadInternalFileDetail } from "element-ui/types/upload";
 import Vue from "vue";
 import { FeedbackItem, RootState } from "../store";
-import { mapState } from "vuex";
+import axios from "axios";
 
 export default Vue.extend({
   name: "FeedbackDialog",
@@ -132,14 +132,28 @@ export default Vue.extend({
       formVisible: false,
       feedbackType: null,
       canShowAttachment: false,
+      feedbackTypes: [
+        {
+          id: 1,
+          name: "Report a Bug",
+          description: "Let us know so we can forward this to our bug control.",
+        },
+        {
+          id: 2,
+          name: "Request a Feature",
+          description:
+            "Do you have an idea that could make our app better? We would love to know!",
+        },
+        {
+          id: 3,
+          name: "Send Applause",
+          description: "Let us know what you really like about our app!",
+        },
+      ],
     };
   },
 
   computed: {
-    ...mapState({
-      feedbackTypes: (s: any) => (s as RootState).feedbackTypes,
-    }),
-
     shouldShowAttachments(): boolean {
       return this.feedbackType != "Send Applause";
     },
@@ -211,8 +225,8 @@ export default Vue.extend({
         //TODO: Upload images first.
         const fileData = new FormData();
         console.log("Before API Call");
-
-        await this.$store.dispatch("submitFeedback", this.feedbackItem);
+        await axios.post(this.feedbackItem.feedback_url, this.feedbackItem);
+        // await this.$store.dispatch("submitFeedback", this.feedbackItem);
         this.$message({
           message: "Feedback submitted.",
           type: "success",
