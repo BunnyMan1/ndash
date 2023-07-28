@@ -84,9 +84,15 @@
             ></el-input>
           </el-form-item>
 
-          <!-- <el-form-item v-if="shouldShowAttachments" label="Attachments"
-            ><br /> -->
-          <!-- //TODO: File Upload funtionality. -->
+          <el-form-item v-if="shouldShowAttachments" label="Attachments"
+            ><br />
+            <!-- //TODO: File Upload funtionality. -->
+            <media-list-insert
+              ref="attachments"
+              :mediaUrl="FeedbackItem?.media_url"
+              :token="FeedbackItem?.token"
+            />
+          </el-form-item>
 
           <br />
           <span style="display: flex">
@@ -106,6 +112,7 @@ import { ElUploadInternalFileDetail } from "element-ui/types/upload";
 import Vue from "vue";
 import { FeedbackItem, RootState } from "../store";
 import axios from "axios";
+import { MediaLiteItem } from "./Media/MediaInsertDialog.vue";
 
 export default Vue.extend({
   name: "FeedbackDialog",
@@ -122,6 +129,7 @@ export default Vue.extend({
         device_id: null as string | null,
         feedback_url: null as string | null,
         media_url: null as string | null,
+        attachments: null as MediaLiteItem[] | null,
         type: null as number | null,
       } as FeedbackItem,
       emailError: null as string | null,
@@ -222,10 +230,8 @@ export default Vue.extend({
         )!.id;
         this.loading = true;
         //TODO: Upload images first.
+        // let attachmentsIds = this.uploadtoServer();
         const fileData = new FormData();
-        // if (this.feedbackItem.auth_token == null) {
-        //   return;
-        // }
         console.log(this.feedbackItem.auth_token);
         let authToken: string = this.feedbackItem.auth_token;
         console.log("Before API Call");
@@ -256,6 +262,29 @@ export default Vue.extend({
         this.loading = false;
       }
     },
+
+    // async uploadtoServer(data: any): Promise<Number> {
+    //   try {
+    //     const res = await this.$axios.post("/media", data, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     });
+    //     if (res.data && res.data.length > 0) return res.data[0];
+    //   } catch (error) {
+    //     if (axios.isAxiosError(error)) {
+    //       console.log(error.response?.data);
+    //       if (
+    //         error.response?.status == 413 ||
+    //         (typeof error.response?.data == "string" &&
+    //           error.response?.data.includes("large"))
+    //       )
+    //         throw "File is too large";
+    //     }
+    //     throw error;
+    //   }
+    //   return 10;
+    // },
   },
 });
 </script>
