@@ -223,9 +223,9 @@ export default Vue.extend({
         this.loading = true;
         //TODO: Upload images first.
         const fileData = new FormData();
-        if (this.feedbackItem.auth_token == null) {
-          return;
-        }
+        // if (this.feedbackItem.auth_token == null) {
+        //   return;
+        // }
         console.log(this.feedbackItem.auth_token);
         let authToken: string = this.feedbackItem.auth_token;
         console.log("Before API Call");
