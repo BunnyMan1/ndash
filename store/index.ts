@@ -11,7 +11,6 @@ const getters: GetterTree<RootState, RootState> = {
 }
 
 const mutations: MutationTree<RootState> = {}
-
 const actions: ActionTree<RootState, RootState> = {
     async uploadMedia({ commit }, data) {
         try {
@@ -31,8 +30,10 @@ const actions: ActionTree<RootState, RootState> = {
         }
     },
 
-    async submitFeedback({ commit }, data: FeedbackItem) {
+    submitFeedback({ commit }, data: FeedbackItem) {
         try {
+            console.log("After API Call");
+
             console.log({
                 "email": data.email,
                 "message": data.message,
@@ -44,8 +45,7 @@ const actions: ActionTree<RootState, RootState> = {
                 "device_id": data.device_id,
             })
             console.log(data.feedback_url)
-            await this.$axios.post(data.feedback_url, data)
-            console.log("After API Call");
+            return this.$axios.post(data.feedback_url, data)
         } catch (e) {
             console.log("feedback error.")
         }

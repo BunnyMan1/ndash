@@ -226,6 +226,7 @@ export default Vue.extend({
         this.loading = true;
         //TODO: Upload images first.
         const fileData = new FormData();
+        console.log("Before API Call");
         await this.$store.dispatch("submitFeedback", this.feedbackItem);
         this.$message({
           message: "Feedback submitted.",
