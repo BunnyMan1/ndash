@@ -31,7 +31,7 @@ const actions: ActionTree<RootState, RootState> = {
         }
     },
 
-    async submitFeedback({ }, data: FeedbackItem) {
+    async submitFeedback({ commit }, data: FeedbackItem) {
         try {
             console.log({
                 "email": data.email,

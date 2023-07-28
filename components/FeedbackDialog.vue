@@ -92,10 +92,7 @@
           <br />
           <span style="display: flex">
             <el-button @click="goBack()">Cancel</el-button>
-            <el-button
-              @click="submitFeedback"
-              type="primary"
-              style="width: 100%"
+            <el-button @click="submit" type="primary" style="width: 100%"
               >Submit</el-button
             >
           </span>
@@ -197,7 +194,7 @@ export default Vue.extend({
         });
     },
 
-    async submitFeedback(): Promise<void> {
+    async submit(): Promise<void> {
       this.emailError = "";
       this.messageError = "";
 
