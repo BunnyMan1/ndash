@@ -229,7 +229,10 @@ export default Vue.extend({
         this.loading = true;
         //TODO: Upload images first.
         const fileData = new FormData();
-        await this.$store.dispatch("submitFeedback", this.feedbackItem);
+        await this.$store.dispatch(
+          "feedback/submitFeedback",
+          this.feedbackItem
+        );
         this.$message({
           message: "Feedback submitted.",
           type: "success",
