@@ -163,8 +163,7 @@ export default Vue.extend({
 
   methods: {
     openDialog(feedback: FeedbackItem) {
-      alert(feedback);
-      this.dialogVisible = false;
+      this.dialogVisible = true;
       this.feedbackType = null;
       this.feedbackItem = feedback;
     },
@@ -176,7 +175,6 @@ export default Vue.extend({
     },
 
     openForm(feedbackType: any) {
-      alert();
       this.resetForm();
       this.feedbackType = feedbackType.name;
       this.dialogVisible = false;
