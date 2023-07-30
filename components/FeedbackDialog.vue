@@ -211,6 +211,10 @@ export default Vue.extend({
 
       this.feedbackItem.attachments.push({
         id: attachment.id,
+        display_label: attachment.display_label,
+        description: attachment.description,
+        display_order: attachment.display_order,
+        is_primary: attachment.is_primary,
       } as MediaLiteItem);
     },
 
