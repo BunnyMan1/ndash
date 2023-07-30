@@ -86,13 +86,27 @@
 
           <el-form-item v-if="shouldShowAttachments" label="Attachments"
             ><br />
-            <!-- //TODO: File Upload funtionality. -->
-            <media-list-insert
+            <!-- <media-list-insert
               ref="attachments"
               :mediaUrl="FeedbackItem?.media_url"
               :token="FeedbackItem?.token"
               @uploadedFile="uploadedFile"
-            />
+            /> -->
+            <el-upload
+              class="upload-demo"
+              :action="feedbackItem.media_url"
+              :on-remove="handleRemove"
+              :on-success="onUploadSuccess"
+              list-type="picture"
+              :headers="{
+                Authorization: 'Bearer ' + feedbackItem.auth_token,
+              }"
+            >
+              <el-button size="small" type="primary">Click to upload</el-button>
+              <div slot="tip" class="el-upload__tip">
+                jpg/png files with a size less than 500kb
+              </div>
+            </el-upload>
           </el-form-item>
 
           <br />
@@ -182,6 +196,24 @@ export default Vue.extend({
   },
 
   methods: {
+    handleRemove(file: any) {
+      let attachment = file.response[0];
+
+      let index = this.feedbackItem.attachments.findIndex(
+        (x) => (x.id = attachment.id)
+      );
+
+      if (index >= 0) this.feedbackItem.attachments.splice(index, 1);
+    },
+
+    onUploadSuccess(file: any) {
+      let attachment = file[0];
+
+      this.feedbackItem.attachments.push({
+        id: attachment.id,
+      } as MediaLiteItem);
+    },
+
     openDialog(feedback: FeedbackItem) {
       this.dialogVisible = true;
       this.feedbackType = null;
@@ -201,12 +233,9 @@ export default Vue.extend({
       } as FeedbackItem;
     },
 
-    uploadedFile(media: MediaLiteItem) {
+    uploadedFile(media: any) {
       console.log(media);
-
       this.feedbackItem.attachments.push({ id: media.id } as MediaLiteItem);
-
-      console.log(this.feedbackItem.attachments);
     },
 
     resetForm() {
@@ -265,12 +294,8 @@ export default Vue.extend({
           (x) => x.name == this.feedbackType
         )!.id;
         this.loading = true;
-        //TODO: Upload images first.
-        // let attachmentsIds = this.uploadtoServer();
-        const fileData = new FormData();
-        console.log(this.feedbackItem.auth_token);
         let authToken: string = this.feedbackItem.auth_token;
-        console.log("Before API Call");
+
         const response = await axios.post(
           this.feedbackItem.feedback_url,
           this.feedbackItem,
@@ -278,9 +303,7 @@ export default Vue.extend({
             headers: { Authorization: "Bearer " + authToken },
           }
         );
-        console.log(response.data, response.status);
-        console.log("After call");
-        // await this.$store.dispatch("submitFeedback", this.feedbackItem);
+
         this.$message({
           message: "Feedback submitted.",
           type: "success",
