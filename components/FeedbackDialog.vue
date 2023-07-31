@@ -365,12 +365,12 @@ export default Vue.extend({
 
 .option-list {
   color: #9d9da6;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 22px; /* 183.333% */
-  letter-spacing: -0.01px;
+  // font-family: Inter;
+  // font-size: 12px;
+  // font-style: normal;
+  // font-weight: 500;
+  // line-height: 22px; /* 183.333% */
+  // letter-spacing: -0.01px;
   padding: 9px 16px;
   border-radius: 4px;
   letter-spacing: -0.01px;
@@ -393,12 +393,12 @@ export default Vue.extend({
   }
   .el-radio__label {
     color: #171724;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 22px; /* 157.143% */
-    letter-spacing: -0.01px;
+    // font-family: Inter;
+    // font-size: 14px;
+    // font-style: normal;
+    // font-weight: 500;
+    // line-height: 22px; /* 157.143% */
+    // letter-spacing: -0.01px;
   }
 }
 
