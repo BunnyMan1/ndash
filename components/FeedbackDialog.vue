@@ -16,7 +16,7 @@
             ></span
           >
           <br />
-          <p class="sub-title">What would you like to do?</p>
+          <p class="sub-heading">What would you like to do?</p>
         </div>
       </template>
       <div>
@@ -34,11 +34,9 @@
             ref="feedback"
           ></el-radio>
           <br />
-          <span
-            class="sub-title feedback-description"
-            style="margin-left: 24px"
-            >{{ item.description }}</span
-          >
+          <span class="sub-title" style="margin-left: 24px">{{
+            item.description
+          }}</span>
         </div>
       </div>
     </el-dialog>
@@ -66,7 +64,7 @@
           </span>
 
           <div class="form-divider"></div>
-          <p class="sub-title">
+          <p class="sub-heading">
             We are listening! Please provide as much information as possible so
             that we can help you.
           </p>
@@ -353,9 +351,9 @@ export default Vue.extend({
   letter-spacing: -0.01px;
 }
 
-.sub-title {
+.sub-heading {
   color: #9d9da6;
-  line-height: 22px;
+  line-height: 24px;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: -0.02px;
@@ -365,9 +363,15 @@ export default Vue.extend({
     color: #171724;
     font-weight: 500;
   }
-  .feedback-description {
-    font-weight: 500;
-  }
+}
+.sub-title {
+  color: #9d9da6;
+  line-height: 22px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.02px;
+  margin-bottom: 10px;
+  margin-top: 6px;
 }
 
 .option-list {
