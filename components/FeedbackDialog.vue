@@ -258,6 +258,9 @@ export default Vue.extend({
       this.emailError = null;
       this.messageError = null;
       this.feedbackItem.message = "";
+      try {
+        (this.$refs.uploadRef as any).clearFiles();
+      } catch (e) {}
     },
 
     openForm(feedbackType: any) {
@@ -328,7 +331,7 @@ export default Vue.extend({
         this.dialogVisible = false;
         this.formVisible = false;
         this.feedbackItem = {} as FeedbackItem;
-        (this.$refs.uploadRef as any).clearFiles();
+        this.resetForm();
       } catch (error: any) {
         this.$message({
           message: "Error in creating feedback.",
