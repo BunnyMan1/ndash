@@ -86,12 +86,6 @@
 
           <el-form-item v-if="shouldShowAttachments" label="Attachments"
             ><br />
-            <!-- <media-list-insert
-              ref="attachments"
-              :mediaUrl="FeedbackItem?.media_url"
-              :token="FeedbackItem?.token"
-              @uploadedFile="uploadedFile"
-            /> -->
             <el-upload
               class="upload-demo"
               :action="feedbackItem.media_url"
@@ -125,9 +119,7 @@
 <script lang="ts">
 import { ElUploadInternalFileDetail } from "element-ui/types/upload";
 import Vue from "vue";
-// import { FeedbackItem, RootState } from "../store";
 import axios from "axios";
-import { MediaLiteItem } from "./Media/MediaInsertDialog.vue";
 
 export interface FeedbackItem {
   email?: string | null;
@@ -141,6 +133,20 @@ export interface FeedbackItem {
   attachments: MediaLiteItem[];
   feedback_url: string;
   media_url: string;
+}
+
+export interface MediaLiteItem {
+  /** Format: int64 */
+  id: number;
+  url: string;
+  thumbnail_url?: string | null;
+  large_url?: string | null;
+  display_label?: string | null;
+  /** Format: int32 */
+  display_order?: number;
+  is_image: boolean;
+  description?: string | null;
+  is_primary: boolean;
 }
 
 export default Vue.extend({
