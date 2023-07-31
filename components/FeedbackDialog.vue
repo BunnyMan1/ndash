@@ -78,14 +78,14 @@
               type="textarea"
               placeholder="Enter your feedback."
               :autosize="{ minRows: 4, maxRows: 4 }"
-              style="width: 100%"
+              style="width: 100% font-style: Robot"
             ></el-input>
           </el-form-item>
           <el-form-item label="E-mail ID" required :error="emailError">
             <el-input
               v-model="feedbackItem.email"
               placeholder="Enter your E-mail ID."
-              style="width: 100%"
+              style="width: 100% font-style: Robot"
             ></el-input>
           </el-form-item>
 
