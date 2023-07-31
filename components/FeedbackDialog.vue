@@ -53,8 +53,11 @@
             <el-button
               @click="goBack"
               icon="el-icon-arrow-left"
-              size="small"
+              class="dialog-back-button"
             ></el-button>
+            <!-- <div class="dialog-back-button">
+              <i class="el-icon-arrow-left"></i>
+            </div> -->
             <span class="selected-option dialog-title">{{ feedbackType }}</span>
           </span>
 
@@ -76,10 +79,10 @@
               style="width: 100%"
             ></el-input>
           </el-form-item>
-          <el-form-item label="Email" required :error="emailError">
+          <el-form-item label="E-mail ID" required :error="emailError">
             <el-input
               v-model="feedbackItem.email"
-              placeholder="Enter your email."
+              placeholder="Enter your E-mail ID."
               style="width: 100%"
             ></el-input>
           </el-form-item>
@@ -87,6 +90,7 @@
           <el-form-item v-if="shouldShowAttachments" label="Attachments"
             ><br />
             <el-upload
+              ref="uploadRef"
               class="upload-demo"
               :action="feedbackItem.media_url"
               :on-remove="handleRemove"
@@ -97,13 +101,13 @@
               }"
             >
               <el-button size="small" type="primary">Click to upload</el-button>
-              <div slot="tip" class="el-upload__tip">
-                jpg/png files with a size less than 500kb
-              </div>
+              <!-- <div slot="tip" class="el-upload__tip">
+                jpg/png files with a size less than 2MB
+              </div> -->
             </el-upload>
           </el-form-item>
 
-          <br />
+          <!-- <br /> -->
           <span style="display: flex">
             <el-button @click="goBack()">Cancel</el-button>
             <el-button @click="submit" type="primary" style="width: 100%"
@@ -322,6 +326,7 @@ export default Vue.extend({
         this.dialogVisible = false;
         this.formVisible = false;
         this.feedbackItem = {} as FeedbackItem;
+        (this.$refs.uploadRef as any).clearFiles();
       } catch (error: any) {
         this.$message({
           message: "Error in creating feedback.",
@@ -400,8 +405,17 @@ export default Vue.extend({
 .el-form-item__label {
   color: #171724;
 }
-</style>
-
-function mapState(arg0: string, arg1: { list: (s: any) => any; listTotalCount: (s: any) => any; }): import("vue/types/options").Accessors<unknown>|undefined {
-  throw new Error("Function not implemented.");
+.icon {
+  align-items: center;
 }
+.dialog-back-button {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  border: 1px solid rgb(152, 152, 152);
+}
+</style>
