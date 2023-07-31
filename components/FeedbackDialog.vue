@@ -78,7 +78,7 @@
               type="textarea"
               placeholder="Enter your feedback."
               :autosize="{ minRows: 4, maxRows: 4 }"
-              style="width: 100% font-style: Roboto"
+              style="width: 100% font-family: Roboto"
             ></el-input>
           </el-form-item>
           <el-form-item label="E-mail ID" required :error="emailError">
