@@ -78,7 +78,7 @@
               type="textarea"
               placeholder="Enter your feedback."
               :autosize="{ minRows: 4, maxRows: 4 }"
-              style="width: 100%; font-family: Roboto"
+              class="feedback-textarea"
             ></el-input>
           </el-form-item>
           <el-form-item label="E-mail ID" required :error="emailError">
@@ -417,6 +417,13 @@ export default Vue.extend({
 .title-container .selected-option {
   margin-left: 160px;
   flex: 1;
+}
+
+.feedback-textarea {
+  width: 100%;
+  textarea {
+    font-family: "Roboto", sans-serif;
+  }
 }
 
 .el-form-item__label {
