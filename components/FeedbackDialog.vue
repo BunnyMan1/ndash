@@ -34,9 +34,11 @@
             ref="feedback"
           ></el-radio>
           <br />
-          <span class="sub-title" style="margin-left: 24px">{{
-            item.description
-          }}</span>
+          <span
+            class="sub-title feedback-description"
+            style="margin-left: 24px"
+            >{{ item.description }}</span
+          >
         </div>
       </div>
     </el-dialog>
@@ -361,7 +363,10 @@ export default Vue.extend({
   margin-top: 6px;
   .feedback-option {
     color: #171724;
-    font-weight: 600;
+    font-weight: 500;
+  }
+  .feedback-description {
+    font-weight: 500;
   }
 }
 
