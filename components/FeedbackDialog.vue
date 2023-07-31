@@ -34,7 +34,9 @@
             ref="feedback"
           ></el-radio>
           <br />
-          <span style="margin-left: 24px">{{ item.description }}</span>
+          <span class="sub-title" style="margin-left: 24px">{{
+            item.description
+          }}</span>
         </div>
       </div>
     </el-dialog>
@@ -353,7 +355,7 @@ export default Vue.extend({
   color: #9d9da6;
   line-height: 22px;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: -0.02px;
   margin-bottom: 10px;
   margin-top: 6px;
