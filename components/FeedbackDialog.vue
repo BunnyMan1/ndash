@@ -64,7 +64,11 @@
           </span>
 
           <div class="form-divider"></div>
-          <p class="sub-heading">
+          <p v-if="shouldShowAttachments" class="sub-heading">
+            We are listening! Please provide as much information as possible so
+            that we can help you.
+          </p>
+          <p v-if="!shouldShowAttachments" class="sub-heading">
             We are listening! Please provide as much information as possible so
             that we can help you.
           </p>
@@ -83,6 +87,7 @@
           </el-form-item>
           <el-form-item label="E-mail ID" required :error="emailError">
             <el-input
+              disabled
               v-model="feedbackItem.email"
               placeholder="Enter your E-mail ID."
               style="width: 100%; font-family: Roboto"
@@ -324,7 +329,7 @@ export default Vue.extend({
         );
 
         this.$message({
-          message: "Feedback submitted.",
+          message: "Feedback Submitted.",
           type: "success",
         });
 
