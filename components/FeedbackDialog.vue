@@ -57,9 +57,6 @@
               icon="el-icon-arrow-left"
               class="dialog-back-button"
             ></el-button>
-            <!-- <div class="dialog-back-button">
-              <i class="el-icon-arrow-left"></i>
-            </div> -->
             <span class="selected-option dialog-title">{{ feedbackType }}</span>
           </span>
 
@@ -107,13 +104,8 @@
               }"
             >
               <el-button size="small" type="primary">Click to upload</el-button>
-              <!-- <div slot="tip" class="el-upload__tip">
-                jpg/png files with a size less than 2MB
-              </div> -->
             </el-upload>
           </el-form-item>
-
-          <!-- <br /> -->
           <span style="display: flex">
             <el-button @click="goBack()">Cancel</el-button>
             <el-button @click="submit" type="primary" style="width: 100%"
