@@ -69,8 +69,7 @@
             that we can help you.
           </p>
           <p v-if="!shouldShowAttachments" class="sub-heading">
-            We are listening! Please provide as much information as possible so
-            that we can help you.
+            Shout-out your favorite feature! We'd love to hear what you like!
           </p>
         </div>
       </template>
