@@ -390,6 +390,7 @@ export default Vue.extend({
 }
 
 .feedback-dialog {
+  min-width: 550px;
   .el-dialog__body {
     border-top: 1px solid #dcdfe6;
     padding: 20px 20px;
