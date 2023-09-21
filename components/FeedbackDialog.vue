@@ -398,6 +398,7 @@ export default Vue.extend({
   padding-top: 9px;
   border-radius: 4px;
   letter-spacing: -0.01px;
+  cursor: pointer;
   border: 1px solid var(--border-color, #dcdfe6);
   background: var(--fill-color-blank, #fff);
   &:not(:first-child) {
