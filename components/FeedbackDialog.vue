@@ -21,6 +21,7 @@
       </template>
       <div>
         <div
+          @click="selectFeedbackType(item)"
           v-for="item in feedbackTypes"
           :key="item.id"
           class="option-list"
@@ -211,7 +212,10 @@ export default Vue.extend({
   },
 
   methods: {
-    selectType(feedbackType: any) {},
+    selectFeedbackType(feedbackType: any) {
+      this.feedbackType = feedbackType.name;
+    },
+
     handleRemove(file: any) {
       let attachment = file.response[0];
 
