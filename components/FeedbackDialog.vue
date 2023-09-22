@@ -182,7 +182,7 @@ export default Vue.extend({
       loading: false,
       dialogVisible: false,
       formVisible: false,
-      feedbackType: null,
+      feedbackType: null as string | null,
       canShowAttachment: false,
       feedbackTypes: [
         {
@@ -212,7 +212,7 @@ export default Vue.extend({
   },
 
   methods: {
-    selectFeedbackType(feedbackType: any) {
+    selectFeedbackType(feedbackType: {id: number, name: string, description: string}): void {
       this.feedbackType = feedbackType.name;
     },
 
