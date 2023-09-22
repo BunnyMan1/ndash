@@ -21,7 +21,7 @@
       </template>
       <div>
         <div
-          @click="openForm(item)"
+          @click="selectFeedbackType(item)"
           v-for="item in feedbackTypes"
           :key="item.id"
           class="option-list"
@@ -38,6 +38,14 @@
             item.description
           }}</span>
         </div>
+        <br />
+        <el-button
+          :disabled="feedbackType == null"
+          @click="openForm()"
+          type="primary"
+          style="width: 100%"
+          >Continue</el-button
+        >
       </div>
     </el-dialog>
 
@@ -174,7 +182,7 @@ export default Vue.extend({
       loading: false,
       dialogVisible: false,
       formVisible: false,
-      feedbackType: null,
+      feedbackType: null as string | null,
       canShowAttachment: false,
       feedbackTypes: [
         {
@@ -204,6 +212,10 @@ export default Vue.extend({
   },
 
   methods: {
+    selectFeedbackType(feedbackType: {id: number, name: string, description: string}): void {
+      this.feedbackType = feedbackType.name;
+    },
+
     handleRemove(file: any) {
       let attachment = file.response[0];
 
@@ -259,19 +271,22 @@ export default Vue.extend({
       } catch (e) {}
     },
 
-    openForm(feedbackType: any) {
+    openForm() {
       this.resetForm();
-      this.feedbackType = feedbackType.name;
       this.dialogVisible = false;
       this.formVisible = true;
     },
 
     goBack() {
-      this.$confirm("This will clears all filled data. Continue?", "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        "This will clear all the filled data. Continue?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(() => {
           this.dialogVisible = true;
           this.formVisible = false;
@@ -363,6 +378,7 @@ export default Vue.extend({
     font-weight: 500;
   }
 }
+
 .sub-title {
   color: #9d9da6;
   line-height: 22px;
@@ -371,12 +387,18 @@ export default Vue.extend({
   letter-spacing: -0.02px;
   margin-bottom: 10px;
   margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  word-break: break-word;
 }
 
 .option-list {
-  padding: 9px 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 9px;
   border-radius: 4px;
   letter-spacing: -0.01px;
+  cursor: pointer;
   border: 1px solid var(--border-color, #dcdfe6);
   background: var(--fill-color-blank, #fff);
   &:not(:first-child) {
@@ -426,9 +448,11 @@ export default Vue.extend({
 .el-form-item__label {
   color: #171724;
 }
+
 .icon {
   align-items: center;
 }
+
 .dialog-back-button {
   display: flex;
   width: 32px;
@@ -438,5 +462,10 @@ export default Vue.extend({
   gap: 4px;
   border-radius: 4px;
   border: 1px solid rgb(152, 152, 152);
+}
+
+.el-button--primary.is-disabled {
+  background-color: #d0d0d0;
+  border-color: #d0d0d0;
 }
 </style>
